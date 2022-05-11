@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="view-text">
+    <h2>View the Latest Weather Update.</h2>
+</div>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">City</th>
+        <th scope="col">Temperature</th>
+        <th scope="col">Main Weather</th>
+        <th scope="col">Descriptions</th>
+        <th scope="col">Icon</th>
+        <th scope="col">Created_at</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for cities in cities_data %}    
+      <tr>
+        <th scope="row">{{ cities.id }}</th>
+        <td>{{ cities.city }}</td>
+        <td>{{ cities.temp }}℃</td>
+        <td>{{ cities.weather_main }}</td>
+        <td>{{ cities.weather_desc }}</td>
+        <td><img class="media-img" src="http://openweathermap.org/img/wn/{{ cities.icon }}.png" alt=""></td>
+        <td>{{ cities.created_at }}</td>
+      </tr>
+    {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+
+
+{% endblock %}

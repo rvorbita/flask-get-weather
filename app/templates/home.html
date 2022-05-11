@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="main-weather" class="mb-3">
+
+    <form class="main-form" action="" method="POST">
+
+        {{ form.csrf_token }}
+    
+        {{ form.city.label(class="form-label") }}
+        {{ form.city(class="form-control", size=32) }}
+        {% for error in form.city.errors %}
+            <span style="color:red">[{{ error }}]</span>
+        {% endfor %}
+    
+        {{ form.submit(class="btn btn-primary") }}
+
+
+        
+        
+    </form>
+
+
+    {% for weather in weather_data %}    
+    <div id="weather-desc" class="media">   
+        <img class="media-img" src="http://openweathermap.org/img/wn/{{ weather.icon }}.png" alt="">
+        <div class="media-content">
+            <h2>{{ weather.city }}</h2>
+            <!-- <h2>{{ weather.city }}</h2> -->
+            <span>{{ weather.temp }} ℃</span>
+            <p><b>Main: </b>{{ weather.weather_main }}</p>
+            <p><b>Desc: </b>{{ weather.weather_desc }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+    <nav aria-label="">
+            <ul class="pagination pagination-sm justify-content-center">
+            {% for page in cities.iter_pages() %} 
+                {% if page %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('home', page_num=page) }}">{{ page }}</a></li>
+                {% else %}
+                    .....
+                {% endif %}
+            {% endfor %}
+            </ul>
+    </nav>
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}
